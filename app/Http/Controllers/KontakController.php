@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\models\siswa;
-use App\models\project;
-use App\models\kontak;
+use App\Models\siswa;
+use App\Models\project;
+use App\Models\kontak;
 
 
 class KontakController extends Controller
