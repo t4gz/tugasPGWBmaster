@@ -17,7 +17,7 @@ class DashboardController extends Controller
     {
         $jumlah = siswa::all()->count();
         $jumlah2 = project::all()->count();
-        return view('master.Dashboard', compact('jumlah'));
+        return view('master.Dashboard', compact('jumlah','jumlah2'));
     }
 
     /**
