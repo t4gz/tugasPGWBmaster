@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\models\siswa;
-use App\models\project;
+use App\Models\siswa;
+use App\Models\project;
 
 
 class ProjectController extends Controller
