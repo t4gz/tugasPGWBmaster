@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Session;
-use App\models\siswa;
+use App\Models\siswa;
 use File;
 use Illuminate\Http\Request;
 
