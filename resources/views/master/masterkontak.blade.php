@@ -1,79 +1,112 @@
 @extends('master.admin')
-@section('title', 'master kontak')
-@section('content-title', 'Master kontak')
+@section('title', 'masterkontak')
+@section('content-title', 'Masterkontak')
 @section('content')
-<div class="col-lg-12">
-	<div>
-			<div class="card shadow mb-4" style="border: 1px solid #bbb;">
-		        <div style="font-weight: 500;" class="card-header bg-gradient-dark text-white">
-			        <i class="fas fa-book me-1" style="margin-right: 5px;"></i>
-			        Create new contact
+@if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong>{{ $message }}</strong>
+        </div>
+    @endif	
+	{{-- dckdacbcklsnladnclnldc --}}
+	<div class="row">
+		<div class="col-lg">
+			<div class="card shadow mb-4">
+		        <div style="font-weight: 500;" class="card-header bg-gradient-dark text-white">						
+			        <i class="fas fa-fw fa-address-card" style="margin-right: 5px;"></i>
+			        Jenis Kontak
 			    </div>
-			    <div id="create.btn" class="card-body">
-					<section class="text-center">
-                    <a href="{{ route('mastersiswa.create')}}" class="btn btn-success">Tambah Kontak Baru</a>
-					</section>
+			    <div class="card-body">
+					<table class="table table-hover" cellspacing="0" width="100%">
+						<thead>
+					        <tr>
+					            <th>No</th>
+					            <th>Jenis Kontak</th>
+                                <th class="text-center">Action</th>
+					        </tr>
+					    </thead>
+						<tbody>
+							@foreach($kontak as $i=> $item)
+                        	<tr>
+								<td scope="row">{{++ $i }}</td>
+                            	<td>{{ $item->jenis_kontak }}</td>
+                            	<td class="text-center">
+
+									<form action="/masterkontak/hapus/{{$item->id}}" method="post">
+										@csrf  
+                                	<button class="btn btn-danger" type="submit"><i class="fas fa-trash"></i></button>
+								</form> 
+
+                            	</td>
+                        	</tr>
+                        	@endforeach
+						</tbody>
+					</table>
+					<div class="card-footer d-flex justify-content-end">
+                   <div style="font-weight: 500; "> 
+							<a href="/tambahjenis" class="btn btn-success">Tambah Kontak</a>
+						</div>
+					</div>
 			    </div>
 		    </div>
 		</div>
-		
-        
-<div class="row">
-		<div class="col-lg-4">
+	</div>
+	{{-- sdjbvgdvkdsbv --}}
+	<div class="row">
+		<div class="col-lg-6">
 			<div class="card shadow mb-4">
 		        <div style="font-weight: 500;" class="card-header bg-gradient-dark text-white">
 			        <i class="fas fa-user me-1" style="margin-right: 5px;"></i>
 			        Data Siswa
 			    </div>
 			    <div class="card-body">
-					<table class="table table-bordered display nowrap" cellspacing="0" width="100%">
+					<table class="table table-hover" cellspacing="0" width="100%">
 					    <thead>
 					        <tr>
-					            <th>Nisn</th>
-					            <th>nama</th>
+					            <th>NISN</th>
+					            <th>Nama</th>
                                 <th>Action</th>
 					        </tr>
 					    </thead>
-                        @foreach ($data as $item)
-                        <tr>
-                            <td>{{ $item-> nisn }}</td>
-                            <td>{{ $item-> nama }}</td>
-                            <td>
-								<a class="btn btn-info" onclick="show({{ $item->id }})"><i class="fas fa-folder-open"></i></a>
-                                <a class="btn btn-info" href="" ><i class="fas fa-plus"></i></a>
-                            </td>
-                        </tr>
-                        @endforeach
+						<tbody>
+                        	@foreach ($data as $item)
+                        	<tr>
+                            	<td>{{ $item->nisn }}</td>
+                            	<td>{{ $item->nama }}</td>
+                            	<td class="text-center">
+                                	<a class="btn btn-info" onclick="show({{ $item->id }})"><i class="fas fa-folder-open"></i></a>
+                                	<a class="btn btn-info" href="/masterkontak/create/{{ $item->id }}"><i class="fas fa-plus"></i></a>
+                            	</td>
+                        	</tr>
+                        	@endforeach
+						</tbody>
 					</table>
-                    <div class="card-footer">
-                    {{ $data->links() }}
+                    <div class="card-footer d-flex justify-content-end">
+                        {{ $data->links() }}
                     </div>
 			    </div>
 		    </div>
+		</div>
 
-	</div>
-
-	<div class="col-lg-8">
+		<div class="col-lg-6">
 			<div class="card shadow mb-4" style="border: 1px solid #bbb;">
 		        <div style="font-weight: 500;" class="card-header bg-gradient-dark text-white">
 			        <i class="fas fa-book me-1" style="margin-right: 5px;"></i>
-			        kontak Siswa
+			        Kontak Siswa
 			    </div>
-			    <div id="project" class="card-body">
+			    <div id="kontak" class="card-body">
 					<section class="text-center">
-					    <h3>Pilih Siswa terlebih dahulu</h3>
+					    <h6>Pilih Siswa Terlebih Dahulu</h6>
 					</section>
 			    </div>
 		    </div>
 		</div>
-</div>
-
+	</div>
 	<script>
-		function show (id) {
-			$.get('masterproject/'+id, function(data){
-				$('#project').html(data);
+		function show(id){
+			$.get('masterkontak/'+id, function(data){
+				$('#kontak').html(data);
 			})
 		}
 	</script>
-	
 @endsection
